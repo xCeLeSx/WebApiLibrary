@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebApiLibrary.Models.Book>
+
+@{
+    ViewData["Title"] = "Lista Książek";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj Książki <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Sukaj" class="btn btn-light" />
+            <a asp-action="Index">x</a>
+        </p>
+    </div>
+</form>
+
+<p>
+    <a asp-action="dodaj">Dodaj Książke</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Tytuł
+            </th>
+            <th>
+                Autor
+            </th>
+            <th>
+                Wydawca
+            </th>
+            <th>
+                Data dodania
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <td>
+                @Convert.ToDateTime(item.Added).ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edycja", new { id = item.BookId }) |
+                @Html.ActionLink("Usuń", "Usun", new { id = item.BookId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

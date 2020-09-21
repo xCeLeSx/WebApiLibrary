@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApiLibrary.Models.Borrow>
+
+@{
+    ViewData["Title"] = "Lista Wypożyczeń";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Dodaj">Dodaj nowe Wypożyczenie</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Id Użytkownika
+            </th>
+            <th>
+                Id Książki
+            </th>
+            <th>
+                Data wypożyczenia
+            </th>
+            <th>
+                Data zwrotu
+            </th>
+            <th>
+                Zwrot
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BorrowDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Return)
+            </td>
+            <td>
+                @Html.ActionLink("Zwrot", "Zwrot", new { id = item.BorrowId }) |
+                @Html.ActionLink("Edytuj", "Edycja", new { id = item.BorrowId }) |
+                @Html.ActionLink("Szczegóły", "Szczegoly", new { id = item.BorrowId }) |
+                @Html.ActionLink("Usuń", "Usun", new { id = item.BorrowId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

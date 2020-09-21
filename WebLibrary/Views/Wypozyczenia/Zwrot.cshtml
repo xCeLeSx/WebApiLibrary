@@ -1,0 +1,45 @@
+﻿@model WebApiLibrary.Models.Borrow
+
+@{
+    ViewData["Title"] = "Zwrot Książki";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Czy na pewno chcesz zatwierdzić poniższy Zwrot?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Id Wypożyczenia
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BorrowId)
+        </dd>
+        <dt class="col-sm-2">
+            Id Użytkownika
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+        <dt class="col-sm-2">
+            Id Książki
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookId)
+        </dd>
+        <dt class="col-sm-2">
+            Data Wypożyczenia
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BorrowDate)
+        </dd>
+    </dl>
+    
+    <form asp-action="Zwrot">
+        <input type="submit" value="Zwrot" class="btn btn-success" />     
+        <hr />
+        <a asp-action="Index">Wróc do Listy Wypożyczeń</a>
+    </form>
+</div>
